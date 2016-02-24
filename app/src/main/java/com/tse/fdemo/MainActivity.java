@@ -1,13 +1,14 @@
 package com.tse.fdemo;
 
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.nineoldandroids.animation.AnimatorSet;
 import com.tse.fdemo.controller.adapter.LVAdapter;
+import com.tse.fdemo.widget.AnimatorButton;
 import com.tse.fdemo.widget.ListViewForInter;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ListViewForInter mlistView;
+    private AnimatorButton aButton;
     private List<String> list;
 
     @Override
@@ -24,9 +26,11 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initEvent();
     }
+
     private void initView() {
         Fresco.initialize(this);
         mlistView = (ListViewForInter) findViewById(R.id.listview);
+        aButton = (AnimatorButton) findViewById(R.id.aButton);
     }
 
     private void initEvent() {
@@ -54,6 +58,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onViewDetachedFromWindow(View v) {
                 Log.e("addOnAttachStateChange", "onViewDetachedFromWindow");
+            }
+        });
+        aButton.setOnSClickListener(new AnimatorButton.SClickListener() {
+            @Override
+            public void onSClick(AnimatorButton.SType type) {
+                if (AnimatorButton.SType.MULTI.equals(type)) {
+                    aButton.showSendButton();
+                } else if (AnimatorButton.SType.SEND.equals(type)) {
+                    aButton.showMulButton();
+                }
             }
         });
     }
