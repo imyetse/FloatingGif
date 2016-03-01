@@ -37,15 +37,14 @@
                 android:padding="10dp"
                 fresco:placeholderImage="@drawable/ic_launcher" />
         </LinearLayout>
-
         <com.tse.fdemo.widget.AnimatorCheckBox
             android:id="@+id/checkbox"
             android:checked="false"
             android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:visibility="gone"/>
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"/>
+
     </RelativeLayout>
 
 </com.tse.fdemo.widget.CustomLinearLayout>

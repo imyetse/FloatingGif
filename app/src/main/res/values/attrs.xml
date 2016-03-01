@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- animatorButton -->
+    <declare-styleable name="aButton">
+        <attr name="aheight" format="dimension" />
+        <attr name="awidth" format="dimension" />
+    </declare-styleable>
+</resources>

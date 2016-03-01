@@ -1,14 +1,11 @@
 package com.tse.fdemo.widget;
 
-import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
@@ -27,51 +24,51 @@ public class AnimatorButton extends RelativeLayout implements View.OnClickListen
     private Button mbutton;//更多按钮
 
     private int height;
+    private int width;
 
-    public AnimatorButton(Context context) {
-        super(context);
-        this.context = context;
-        init();
-    }
 
     public AnimatorButton(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
+    }
+
+    public AnimatorButton(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
         this.context = context;
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.aButton, defStyleAttr, 0);
+        height = a.getDimensionPixelOffset(R.styleable.aButton_aheight, 80);
+        width = a.getDimensionPixelOffset(R.styleable.aButton_awidth, 120);
         init();
     }
 
+
     public void init() {
-        height = 0;
-        post(new Runnable() {
-            @Override
-            public void run() {
-                height = getHeight();
-                mbutton = new Button(context);
-                mbutton.setId(R.id.multi_id);
-                mbutton.setOnClickListener(AnimatorButton.this);
-                mbutton.setGravity(Gravity.CENTER);
-                mbutton.setBackgroundResource(R.drawable.icon_add_nomal);
-                LayoutParams mparams = new LayoutParams(height, height);
-                mparams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-                addView(mbutton, 0, mparams);
-                sbutton = new Button(context);
-                sbutton.setId(R.id.send_id);
-                sbutton.setOnClickListener(AnimatorButton.this);
-                sbutton.setPadding(8, 8, 8, 8);
-                sbutton.setText("发送");
-                sbutton.setTextColor(context.getResources().getColor(R.color.white));
-                sbutton.setBackgroundResource(R.drawable.button_send_selector);
-                LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-                addView(sbutton, 1, params);
-                getChildAt(1).setVisibility(INVISIBLE);
-            }
-        });
+        int resylt = Math.min(height,width);
+        mbutton = new Button(context);
+        mbutton.setId(R.id.multi_id);
+        mbutton.setOnClickListener(AnimatorButton.this);
+        mbutton.setGravity(Gravity.CENTER);
+        mbutton.setBackgroundResource(R.drawable.icon_add_nomal);
+        LayoutParams mparams = new LayoutParams(resylt, resylt);
+        mparams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        addView(mbutton, 0, mparams);
+        sbutton = new Button(context);
+        sbutton.setId(R.id.send_id);
+        sbutton.setOnClickListener(AnimatorButton.this);
+        sbutton.setPadding(8, 8, 8, 8);
+        sbutton.setText("发送");
+        sbutton.setTextColor(context.getResources().getColor(R.color.white));
+        sbutton.setBackgroundResource(R.drawable.button_send_selector);
+        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        addView(sbutton, 1, params);
+        getChildAt(1).setVisibility(INVISIBLE);
+
     }
 
 
     public void showMulButton() {
         if (getChildAt(0).getVisibility() == VISIBLE)
             return;
+
 
         ObjectAnimator animIn1 = ObjectAnimator.ofFloat(sbutton, "scaleX", 1.0f, 0.8f);
         ObjectAnimator animIn2 = ObjectAnimator.ofFloat(sbutton, "scaleY", 1.0f, 0.8f);
