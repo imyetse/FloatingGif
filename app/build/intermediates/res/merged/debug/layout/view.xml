@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.tse.fdemo.widget.CustomLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/view_ll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/default_selector"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/draweeView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/default_selector"
+                android:padding="10dp"
+                fresco:placeholderImage="@drawable/ic_launcher" />
+        </LinearLayout>
+        <com.tse.fdemo.widget.AnimatorCheckBox
+            android:id="@+id/checkbox"
+            android:checked="false"
+            android:layout_centerVertical="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+</com.tse.fdemo.widget.CustomLinearLayout>
